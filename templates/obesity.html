@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BMI Calculator</title>
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><h3>Diabetes Prediction</h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/predict">Predictor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Obesity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="box" style="margin: auto;width:600px;padding-top: 100px;">
+			<h1>BMI Calculator</h1>
+			<div class="display">
+				        <p id="result" class="text-center">20.0</p>
+				        <p id="category">Normal weight</p>
+			</div>
+        <div class="row">
+            <input type="range" min="20" max="200" value="20" id="weight" oninput="calculate()">
+            <span id="weight-val">20 kg</span>
+        </div>
+        <div class="row">
+            <input type="range" min="100" max="250" value="100" id="height" oninput="calculate()">
+            <span id="height-val">100 cm</span>
+        </div>
+
+
+    </div>
+
+    <div class="fixed-bottom" data-aos="fade-up">
+        <footer class="text-center text-white " style="background-color: #f1f1f1;">
+            <!-- Grid container -->
+            <div class="container py-5">
+
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:
+                <a class="text-dark" href="https://mdbootstrap.com/">Diabetes Prediction</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+    </div>
+    <!-- End of .container -->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+
+    <!--Script-->
+    <script type="text/javascript">
+function calculate(){
+  //Need to determine the constant of some id functions.
+    var bmi;
+    var result = document.getElementById("result");
+  //The value of the height slider
+    var height = parseInt(document.getElementById("height").value);
+  //The value of the weight slider
+    var weight = parseInt(document.getElementById("weight").value);
+  
+  //The value of height and width should be displayed in the webpage using "textContent".
+    document.getElementById("weight-val").textContent = weight + " kg";
+    document.getElementById("height-val").textContent = height + " cm";
+  
+//Now I have added the formula for calculating BMI in "bmi"
+    bmi = (weight / Math.pow( (height/100), 2 )).toFixed(1);
+  //With the help of "textContent" we have arranged to display in the result page of BMI
+    result.textContent = bmi;
+
+  
+  //Now we have to make arrangements to show the text
+  
+  
+  //When the BMI is less than 18.5, you can see the text below
+    if(bmi < 18.5){
+        category = "Underweight 😒";
+        result.style.color = "#ffc44d";
+    }
+  
+  //If BMI is >=18.5 and <=24.9
+    else if( bmi >= 18.5 && bmi <= 24.9 ){
+        category = "Normal Weight 😍";
+        result.style.color = "#0be881";
+    }
+  
+  //If BMI is >= 25 and <= 29.9 
+    else if( bmi >= 25 && bmi <= 29.9 ){
+        category = "Overweight 😮";
+        result.style.color = "#ff884d";
+    }
+  
+  //If BMI is <= 30
+    else{
+        category = "Obese 😱";
+        result.style.color = "#ff5e57";
+    }
+  //All of the above text is stored in "category".
+
+//Now you have to make arrangements to display the information in the webpage with the help of "textContent"
+    document.getElementById("category").textContent = category;
+}
+    </script>
+</body>
+</html>
